@@ -1,0 +1,15 @@
+##Create environment
+python -m venv myvenv
+myenv\Scripts\activate
+deactivate
+virtualenv -p python3 virtual_env
+virtual_env\Scripts\activate
+conda create -p venv1 python==3.10 -y
+conda activate venv
+
+##Install libraries
+pip install numpy
+pip install virtualenv
+
+##Check version
+python --version
