@@ -2,7 +2,6 @@
 Data structures for the Buffer.
 It holds the text, cursor position, history, etc...
 """
-
 from __future__ import annotations
 
 import asyncio
@@ -86,7 +85,12 @@ class CompletionState:
         self.complete_index = complete_index  # Position in the `_completions` array.
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.original_document!r}, <{len(self.completions)!r}> completions, index={self.complete_index!r})"
+        return "{}({!r}, <{!r}> completions, index={!r})".format(
+            self.__class__.__name__,
+            self.original_document,
+            len(self.completions),
+            self.complete_index,
+        )
 
     def go_to_index(self, index: int | None) -> None:
         """
@@ -145,7 +149,12 @@ class YankNthArgState:
         self.n = n
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(history_position={self.history_position!r}, n={self.n!r}, previous_inserted_word={self.previous_inserted_word!r})"
+        return "{}(history_position={!r}, n={!r}, previous_inserted_word={!r})".format(
+            self.__class__.__name__,
+            self.history_position,
+            self.n,
+            self.previous_inserted_word,
+        )
 
 
 BufferEventHandler = Callable[["Buffer"], None]
@@ -179,9 +188,6 @@ class Buffer:
         In case of a `PromptSession` for instance, we want to keep the text,
         because we will exit the application, and only reset it during the next
         run.
-    :param max_number_of_completions: Never display more than this number of
-        completions, even when the completer can produce more (limited by
-        default to 10k for performance).
 
     Events:
 
@@ -228,13 +234,12 @@ class Buffer:
         accept_handler: BufferAcceptHandler | None = None,
         read_only: FilterOrBool = False,
         multiline: FilterOrBool = True,
-        max_number_of_completions: int = 10000,
         on_text_changed: BufferEventHandler | None = None,
         on_text_insert: BufferEventHandler | None = None,
         on_cursor_position_changed: BufferEventHandler | None = None,
         on_completions_changed: BufferEventHandler | None = None,
         on_suggestion_set: BufferEventHandler | None = None,
-    ) -> None:
+    ):
         # Accept both filters and booleans as input.
         enable_history_search = to_filter(enable_history_search)
         complete_while_typing = to_filter(complete_while_typing)
@@ -256,7 +261,6 @@ class Buffer:
         self.enable_history_search = enable_history_search
         self.read_only = read_only
         self.multiline = multiline
-        self.max_number_of_completions = max_number_of_completions
 
         # Text width. (For wrapping, used by the Vi 'gq' operator.)
         self.text_width = 0
@@ -1743,13 +1747,6 @@ class Buffer:
 
                         # If the input text changes, abort.
                         if not proceed():
-                            break
-
-                        # Always stop at 10k completions.
-                        if (
-                            len(complete_state.completions)
-                            >= self.max_number_of_completions
-                        ):
                             break
             finally:
                 refresh_task.cancel()

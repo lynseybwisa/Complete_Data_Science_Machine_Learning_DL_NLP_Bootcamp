@@ -9,7 +9,6 @@ When the UI is rendered, these transformations can be applied right after the
 style strings are turned into `Attrs` objects that represent the actual
 formatting.
 """
-
 from __future__ import annotations
 
 from abc import ABCMeta, abstractmethod

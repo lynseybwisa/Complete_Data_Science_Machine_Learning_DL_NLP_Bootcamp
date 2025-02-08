@@ -210,8 +210,10 @@ class ANSI:
                 # True colors.
                 if n == 2 and len(attrs) >= 3:
                     try:
-                        color_str = (
-                            f"#{attrs.pop():02x}{attrs.pop():02x}{attrs.pop():02x}"
+                        color_str = "#{:02x}{:02x}{:02x}".format(
+                            attrs.pop(),
+                            attrs.pop(),
+                            attrs.pop(),
                         )
                     except IndexError:
                         pass

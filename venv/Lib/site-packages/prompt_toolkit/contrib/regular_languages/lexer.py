@@ -2,7 +2,6 @@
 `GrammarLexer` is compatible with other lexers and can be used to highlight
 the input using a regular grammar with annotations.
 """
-
 from __future__ import annotations
 
 from typing import Callable

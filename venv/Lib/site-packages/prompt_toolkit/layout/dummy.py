@@ -2,7 +2,6 @@
 Dummy layout. Used when somebody creates an `Application` without specifying a
 `Layout`.
 """
-
 from __future__ import annotations
 
 from prompt_toolkit.formatted_text import HTML

@@ -33,16 +33,6 @@ __all__ = [
 E = KeyPressEvent
 
 
-@Condition
-def is_returnable() -> bool:
-    return get_app().current_buffer.is_returnable
-
-
-@Condition
-def is_arg() -> bool:
-    return get_app().key_processor.arg == "-"
-
-
 def load_emacs_bindings() -> KeyBindingsBase:
     """
     Some e-macs extensions.
@@ -144,13 +134,17 @@ def load_emacs_bindings() -> KeyBindingsBase:
         if event._arg is None:
             event.append_to_arg_count("-")
 
-    @handle("-", filter=is_arg)
+    @handle("-", filter=Condition(lambda: get_app().key_processor.arg == "-"))
     def _dash(event: E) -> None:
         """
         When '-' is typed again, after exactly '-' has been given as an
         argument, ignore this.
         """
         event.app.key_processor.arg = "-"
+
+    @Condition
+    def is_returnable() -> bool:
+        return get_app().current_buffer.is_returnable
 
     # Meta + Enter: always accept input.
     handle("escape", "enter", filter=insert_mode & is_returnable)(

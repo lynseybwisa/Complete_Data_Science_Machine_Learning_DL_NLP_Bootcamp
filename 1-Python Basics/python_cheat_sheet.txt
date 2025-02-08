@@ -10,6 +10,8 @@ conda activate venv
 ##Install libraries
 pip install numpy
 pip install virtualenv
+pip install -r requirements.txt
+
 
 ##Check version
 python --version

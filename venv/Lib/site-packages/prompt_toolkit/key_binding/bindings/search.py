@@ -1,7 +1,6 @@
 """
 Search related key bindings.
 """
-
 from __future__ import annotations
 
 from prompt_toolkit import search

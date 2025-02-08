@@ -1,7 +1,6 @@
 """
 Implementation for async generators.
 """
-
 from __future__ import annotations
 
 from asyncio import get_running_loop

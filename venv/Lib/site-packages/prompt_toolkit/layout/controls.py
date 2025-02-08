@@ -1,7 +1,6 @@
 """
 User interface Controls for the layout.
 """
-
 from __future__ import annotations
 
 import time

@@ -1,7 +1,6 @@
 """
 The `Document` that implements all the text operations/querying.
 """
-
 from __future__ import annotations
 
 import bisect

@@ -1,7 +1,6 @@
 """
 Key bindings for auto suggestion (for fish-style auto suggestion).
 """
-
 from __future__ import annotations
 
 import re

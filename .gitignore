@@ -1,0 +1,7 @@
+# Ignore Conda environment files
+venv/
+env/
+*.pyc
+__pycache__/
+.DS_Store
+*.log

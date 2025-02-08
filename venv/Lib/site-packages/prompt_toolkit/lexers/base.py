@@ -1,7 +1,6 @@
 """
 Base classes for prompt_toolkit lexers.
 """
-
 from __future__ import annotations
 
 from abc import ABCMeta, abstractmethod

@@ -4,7 +4,6 @@ specification, but sufficient for a command line interface.)
 
 Inspired by `Twisted.conch.telnet`.
 """
-
 from __future__ import annotations
 
 import struct

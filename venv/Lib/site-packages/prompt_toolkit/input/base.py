@@ -1,7 +1,6 @@
 """
 Abstraction of CLI Input.
 """
-
 from __future__ import annotations
 
 from abc import ABCMeta, abstractmethod, abstractproperty
@@ -117,7 +116,7 @@ class DummyInput(Input):
         raise NotImplementedError
 
     def typeahead_hash(self) -> str:
-        return f"dummy-{id(self)}"
+        return "dummy-%s" % id(self)
 
     def read_keys(self) -> list[KeyPress]:
         return []

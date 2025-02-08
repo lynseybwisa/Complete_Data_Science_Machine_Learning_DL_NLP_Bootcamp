@@ -29,16 +29,6 @@ def if_no_repeat(event: E) -> bool:
     return not event.is_repeat
 
 
-@Condition
-def has_text_before_cursor() -> bool:
-    return bool(get_app().current_buffer.text)
-
-
-@Condition
-def in_quoted_insert() -> bool:
-    return get_app().quoted_insert
-
-
 def load_basic_bindings() -> KeyBindings:
     key_bindings = KeyBindings()
     insert_mode = vi_insert_mode | emacs_insert_mode
@@ -181,6 +171,10 @@ def load_basic_bindings() -> KeyBindings:
 
     # CTRL keys.
 
+    @Condition
+    def has_text_before_cursor() -> bool:
+        return bool(get_app().current_buffer.text)
+
     handle("c-d", filter=has_text_before_cursor & insert_mode)(
         get_by_name("delete-char")
     )
@@ -245,6 +239,10 @@ def load_basic_bindings() -> KeyBindings:
         data = data.replace("\r", "\n")
 
         event.current_buffer.insert_text(data)
+
+    @Condition
+    def in_quoted_insert() -> bool:
+        return get_app().quoted_insert
 
     @handle(Keys.Any, filter=in_quoted_insert, eager=True)
     def _insert_text(event: E) -> None:

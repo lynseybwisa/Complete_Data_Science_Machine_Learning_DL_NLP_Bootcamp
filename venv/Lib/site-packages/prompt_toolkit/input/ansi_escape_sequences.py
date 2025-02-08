@@ -10,7 +10,6 @@ mostly Xterm compatible.
 Some useful docs:
 - Mintty: https://github.com/mintty/mintty/blob/master/wiki/Keycodes.md
 """
-
 from __future__ import annotations
 
 from ..keys import Keys

@@ -15,7 +15,6 @@ through the `Window` class where the coordinates are translated from absolute
 coordinates to coordinates relative to the user control, and there
 `UIControl.mouse_handler` is called.
 """
-
 from __future__ import annotations
 
 from enum import Enum
@@ -82,4 +81,9 @@ class MouseEvent:
         self.modifiers = modifiers
 
     def __repr__(self) -> str:
-        return f"MouseEvent({self.position!r},{self.event_type!r},{self.button!r},{self.modifiers!r})"
+        return "MouseEvent({!r},{!r},{!r},{!r})".format(
+            self.position,
+            self.event_type,
+            self.button,
+            self.modifiers,
+        )

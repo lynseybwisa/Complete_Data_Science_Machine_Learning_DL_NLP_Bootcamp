@@ -6,7 +6,6 @@ Usage::
     from pygments.styles.tango import TangoStyle
     style = style_from_pygments_cls(pygments_style_cls=TangoStyle)
 """
-
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
